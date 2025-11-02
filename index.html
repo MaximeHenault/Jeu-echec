@@ -1,11 +1,52 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>Jeu d'Échecs 2D</title>
-  <script src="https://cdn.jsdelivr.net/npm/phaser@3/dist/phaser.js"></script>
+  <meta charset="utf-8" />
+  <title>Chess Phaser - Fixed</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <script src="https://cdn.jsdelivr.net/npm/phaser@3/dist/phaser.min.js"></script>
+  <!-- chess.js doit être présent (moteur de règles) -->
+  <script src="chess.js"></script>
+  <script src="main.js"></script>
+
+  <style>
+    :root { --bg:#222; --panel:#1b1b1b; --text:#eaeaea; --muted:#bdbdbd; }
+    html,body { height:100%; margin:0; font-family: "Segoe UI", Roboto, Arial, sans-serif; background:var(--bg); color:var(--text); display:flex; align-items:center; justify-content:center; }
+    .page { width: 560px; }
+    #game-container { background: var(--panel); display:block; margin: 0 auto; box-shadow: 0 8px 30px rgba(0,0,0,0.6); border-radius:8px; overflow: hidden; }
+    .ui {
+      margin-top: 12px;
+      padding: 10px;
+      color: var(--muted);
+      background: transparent;
+      text-align: center;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+    .ui b { color: var(--text); }
+    .notice { color: #ffd54f; font-weight:600; }
+    button#undoBtn {
+      margin-left: 8px;
+      padding:6px 10px;
+      background:#2e2e2e;
+      color:var(--text);
+      border: none; border-radius:6px; cursor:pointer;
+    }
+    button#undoBtn:hover { filter: brightness(1.1); }
+  </style>
 </head>
 <body>
-  <script src="main.js"></script>
+  <div class="page">
+    <!-- Phaser injecte le canvas dans #game-container -->
+    <div id="game-container"></div>
+
+    <!-- Instructions lisibles en HTML (fix du texte mal affiché) -->
+    <div class="ui">
+      <div><b>Règles / commandes :</b> Glisse et lâche les pièces pour jouer. Seuls les pièces du joueur dont c'est le tour sont déplaçables.</div>
+      <div style="margin-top:6px;"><span class="notice">Clic droit</span> = annuler le dernier coup, <span class="notice">Clic gauche</span> = sélectionner pour voir les déplacements légaux.</div>
+      <div style="margin-top:8px;">Si une promotion est possible, une boîte de dialogue s'affichera pour choisir (Q,R,B,N).</div>
+      <div style="margin-top:8px;"><button id="undoBtn">Annuler (undo)</button></div>
+    </div>
+  </div>
 </body>
 </html>
